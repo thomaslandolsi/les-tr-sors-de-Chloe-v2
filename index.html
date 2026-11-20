@@ -18,6 +18,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..500,100,0&family=Instrument+Sans:wght@400;500;600&family=Monsieur+La+Doulaise&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/table-portants.jpg">
+<script>
+/* =====================================================================
+   BOUTIQUE EN LIGNE (Shopify) : le seul endroit à modifier
+   mode : "off"  = rien ne s'affiche
+          "soon" = section « bientôt en ligne » avec des pièces d'exemple
+          "live" = vrais produits Shopify + panier (il faut storeDomain)
+   storeDomain : l'adresse myshopify de la boutique, ex. "les-tresors-de-chloe.myshopify.com"
+   collection  : identifiant (handle) d'une collection Shopify à montrer,
+                 ex. "en-ligne". Vide = les derniers produits de la boutique
+   count       : nombre de produits affichés (4 ou 8 rendent bien)
+   Aucun jeton n'est nécessaire pour afficher les produits et le panier.
+   ===================================================================== */
+window.CHLOE_SHOP = {
+  mode: "soon",
+  storeDomain: "",
+  collection: "",
+  count: 4,
+  country: "FR",
+  language: "FR"
+};
+(function(s){
+  var m = s.mode === "live" && !s.storeDomain ? "soon" : s.mode;
+  document.documentElement.setAttribute("data-shop", /^(off|soon|live)$/.test(m) ? m : "off");
+})(window.CHLOE_SHOP);
+</script>
 <style>
 :root{
   /* V2 : palette tirée du logo (trait bleu ardoise, nacre pêche de la coquille) et du sable de Bénodet */
@@ -204,33 +229,18 @@ html:not(.js) .stripes{transform:none}
 .story p{color:#D9DEE5;max-width:50ch}
 .story p + p{margin-top:16px}
 .story .btn{margin-top:32px}
-.duo{position:relative;padding-bottom:18%}
+.duo{position:relative;padding-bottom:20%}
 .duo img{border-radius:var(--r);object-fit:cover}
-.duo .a{width:78%;aspect-ratio:4/5;object-position:50% 30%}
-.duo .b{position:absolute;right:0;bottom:0;width:56%;aspect-ratio:16/10;border:6px solid var(--cocoa)}
-.stamp{position:absolute;left:62%;top:6%;width:118px;height:118px;color:var(--peach)}
+.duo .a{display:block;width:84%;margin-left:auto;aspect-ratio:944/638;height:auto}
+.duo .b{position:absolute;left:0;bottom:0;width:38%;height:auto;aspect-ratio:16/10;border:6px solid var(--cocoa)}
+.stamp{position:absolute;right:6%;bottom:-2%;width:118px;height:118px;color:var(--peach)}
 .stamp text{font:600 9.6px/1 "Instrument Sans",sans-serif;letter-spacing:2.6px;text-transform:uppercase;fill:currentColor}
 .stamp .spin{transform-origin:60px 60px;animation:spin 40s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media (max-width:860px){.story-grid{grid-template-columns:1fr}.duo{max-width:520px}.stamp{width:96px;height:96px;left:auto;right:4%}}
+@media (max-width:860px){.story-grid{grid-template-columns:1fr}.duo{max-width:520px}.stamp{width:84px;height:84px;right:4%;bottom:-6%}}
 
-/* ---------- en ce moment (carrousel) ---------- */
-.rail-wrap{position:relative}
-.rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(220px,23vw,290px);gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px max(16px,calc((100% - 1240px)/2)) 8px;scroll-padding-inline:max(16px,calc((100% - 1240px)/2))}
-.rail::-webkit-scrollbar{display:none}
-.item{scroll-snap-align:start;margin:0}
-.item .ph{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/5;background:var(--sand)}
-.item img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
-.item:hover img{transform:scale(1.05)}
-.item figcaption{margin-top:12px;font-family:Fraunces,serif;font-size:1.2rem}
-.item small{display:block;font:400 .9rem/1.4 "Instrument Sans",sans-serif;color:var(--muted);margin-top:3px}
+/* étiquette manuscrite sur les photos */
 .tag{position:absolute;left:12px;top:12px;background:var(--cream);color:var(--rose-ink);border-radius:999px;padding:4px 14px 7px;font-size:1.7rem}
-.rail-ctrl{display:flex;gap:10px}
-.arrow{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:background .3s,color .3s,opacity .3s}
-.arrow:hover:not(:disabled){background:var(--ink);color:var(--cream)}
-.arrow:disabled{opacity:.3;cursor:default}
-.arrow svg{width:20px;height:20px}
-.rail-foot{margin-top:34px}
 .link{font-weight:600;color:var(--rose-ink);text-decoration:none;border-bottom:1.5px solid currentColor;padding-bottom:2px;display:inline-flex;align-items:center;gap:8px}
 .link svg{width:16px;height:16px;transition:transform .3s var(--ease)}
 .link:hover svg{transform:translateX(3px)}
@@ -291,7 +301,7 @@ html:not(.js) .stripes{transform:none}
 .addr{font-size:1.2rem;font-weight:500;margin-bottom:6px}
 .venir .muted{color:var(--muted);max-width:44ch}
 .cta-row{display:flex;flex-wrap:wrap;gap:12px;margin:28px 0 30px}
-.door{border-radius:var(--r);width:100%;aspect-ratio:16/9;object-fit:cover;object-position:30% 60%}
+.door{border-radius:var(--r);width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:50% 50%}
 .door-cap{font-size:.88rem;color:var(--muted);margin-top:10px}
 @media (max-width:860px){.venir-grid{grid-template-columns:1fr}}
 
@@ -324,6 +334,43 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
 @media (max-width:860px){.foot-grid{grid-template-columns:1fr 1fr}}
 
 @media (pointer:coarse){.nav a,.foot a{min-height:44px;display:inline-flex;align-items:center}.foot li{margin:0}}
+
+/* ---------- boutique en ligne (emplacement Shopify) ---------- */
+[data-shop="off"] [data-shop-slot]{display:none!important}
+[data-shop="live"] [data-soon],[data-shop="soon"] [data-live]{display:none!important}
+.shop-btn{position:relative;color:inherit;cursor:pointer;background:none;font:inherit}
+.shop-badge{position:absolute;right:-12px;top:-7px;background:var(--rose);color:var(--cocoa);border-radius:999px;padding:2px 7px 3px;font:600 .58rem/1.2 "Instrument Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none}
+.eshop{background:var(--cream);position:relative}
+.eshop .sec-head p{margin-top:14px}
+.prods{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.prods shopify-context,.prods shopify-list-context,.prods [shopify-loading-placeholder]{display:contents}
+.prods shopify-store{display:none}
+.prod{display:flex;flex-direction:column;min-width:0}
+.prod .ph{position:relative;overflow:hidden;border-radius:var(--r);aspect-ratio:4/5;background:var(--sand)}
+.prod .ph img{width:100%;height:100%;object-fit:cover;transition:transform 1.2s var(--ease)}
+.prod:hover .ph img{transform:scale(1.04)}
+.prod .ph shopify-media{display:block;width:100%;height:100%}
+.prod-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:14px}
+.prod h3{font-size:1.25rem;line-height:1.2}
+.prod .price{flex:none;font-weight:600;color:var(--rose-ink);font-size:.95rem}
+.prod .soon-note{display:block;color:var(--muted);font-size:.9rem;margin-top:2px}
+.prod .btn{margin-top:14px;min-height:44px;padding:0 18px;font-size:.88rem;align-self:flex-start}
+.prod .btn[aria-disabled="true"]{cursor:not-allowed;opacity:.55;transform:none}
+.prod .btn[aria-disabled="true"]:hover{background:transparent;border-color:var(--rose-ink);color:var(--rose-ink)}
+.prod-ghost .ph{animation:ghost 1.4s ease-in-out infinite alternate}
+.prod-ghost .bar{height:14px;border-radius:7px;background:var(--sand);margin-top:16px;width:70%}
+@keyframes ghost{to{opacity:.55}}
+.eshop-foot{margin-top:38px;display:flex;flex-wrap:wrap;gap:14px 28px;align-items:center}
+.eshop-foot small{color:var(--muted);font-size:.9rem}
+shopify-cart::part(primary-button){background:var(--cocoa);color:var(--cream);border-radius:999px}
+shopify-cart::part(dialog){border-radius:var(--r)}
+@media (max-width:1000px){.prods{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.prods{gap:26px 14px}.prod h3{font-size:1.05rem}.prod-row{flex-direction:column;gap:2px}.prod .btn{padding:0 14px;font-size:.8rem;align-self:stretch}}
+@media (max-width:900px){
+  .top-right{gap:10px}
+  html:not([data-shop="off"]) .top-right .ig-btn{display:none}
+  .shop-badge{right:-6px}
+}
 
 /* ---------- mouvement réduit ---------- */
 @media (prefers-reduced-motion:reduce){
@@ -364,6 +411,7 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
     <symbol id="ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></g></symbol>
     <symbol id="tel" viewBox="0 0 24 24"><path d="M6.6 3.8 9 3.5l1.6 4-2 1.3a11 11 0 0 0 6.6 6.6l1.3-2 4 1.6-.3 2.4a2 2 0 0 1-2.2 1.7C10.4 18.5 5.5 13.6 4.9 6a2 2 0 0 1 1.7-2.2Z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></symbol>
     <symbol id="pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z"/><circle cx="12" cy="10" r="2.3"/></g></symbol>
+    <symbol id="bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5.5 8h13l-1 12.5h-11Z"/><path d="M9 10.5V7a3 3 0 0 1 6 0v3.5" stroke-linecap="round"/></g></symbol>
     <symbol id="star" viewBox="0 0 24 24"><path d="m12 3 2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6L3.3 9.3l6.1-.7Z" fill="currentColor"/></symbol>
   </defs>
 </svg>
@@ -386,7 +434,7 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
       <nav class="nav" aria-label="Navigation principale">
         <a href="#boutique">La boutique</a>
         <a href="#rayons">Les rayons</a>
-        <a href="#en-ce-moment">En ce moment</a>
+        <a href="#e-boutique" data-shop-slot>En ligne</a>
       </nav>
     </div>
     <a class="brand" href="#top" aria-label="Les Trésors de Chloé, retour en haut">
@@ -396,7 +444,8 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
     </a>
     <div class="top-right">
       <a class="txt" href="#venir">Horaires et accès</a>
-      <a class="icon-btn" href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener" aria-label="Instagram de la boutique"><svg aria-hidden="true"><use href="#ig"/></svg></a>
+      <a class="icon-btn shop-btn" href="#e-boutique" data-shop-slot data-cart-btn aria-label="Boutique en ligne, bientôt disponible"><svg aria-hidden="true"><use href="#bag"/></svg><span class="shop-badge" data-soon aria-hidden="true">bientôt</span></a>
+      <a class="icon-btn ig-btn" href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener" aria-label="Instagram de la boutique"><svg aria-hidden="true"><use href="#ig"/></svg></a>
     </div>
   </div>
 </header>
@@ -409,10 +458,10 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
   <ul>
     <li><a href="#boutique">La boutique</a></li>
     <li><a href="#rayons">Les rayons</a></li>
-    <li><a href="#en-ce-moment">En ce moment</a></li>
+    <li data-shop-slot><a href="#e-boutique">Boutique en ligne</a></li>
     <li><a href="#venir">Horaires et accès</a></li>
   </ul>
-  <p class="menu-foot">2 rue de l'Église, 29950 Bénodet<br><a href="tel:+33645518822">06 45 51 88 22</a></p>
+  <p class="menu-foot">2 rue de l'Église, 29950 Bénodet<br><a href="tel:+33645518822">06 45 51 88 22</a><br><a href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener">Instagram</a></p>
 </div>
 
 <main id="main" tabindex="-1">
@@ -447,12 +496,12 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
       </div>
       <div class="cards">
         <a class="card rv" href="#venir" aria-label="Pour elle : venir voir le rayon à la boutique">
-          <figure><img src="assets/femme.jpg" alt="" loading="lazy" width="512" height="640"></figure>
+          <figure><img src="assets/pour-elle-duo.jpg" alt="" loading="lazy" width="640" height="792" style="object-position:50% 30%"></figure>
           <div class="card-row"><h3>Pour elle</h3><span class="chip" aria-hidden="true"><svg><use href="#arrow"/></svg></span></div>
           <p>Mailles douces, chemises, jeans et pièces de saison.</p>
         </a>
         <a class="card rv d1" href="#venir" aria-label="Pour lui : venir voir le rayon à la boutique">
-          <figure><img src="assets/homme.jpg" alt="" loading="lazy" width="518" height="640"></figure>
+          <figure><img src="assets/pour-lui-portant.jpg" alt="" loading="lazy" width="768" height="1024"></figure>
           <div class="card-row"><h3>Pour lui</h3><span class="chip" aria-hidden="true"><svg><use href="#arrow"/></svg></span></div>
           <p>Pulls, vestes et basiques bien coupés.</p>
         </a>
@@ -475,7 +524,7 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
   <section class="sec story" aria-labelledby="h-story">
     <div class="wrap story-grid">
       <div class="duo rv">
-        <img class="a" src="assets/devanture.jpg" alt="Deux clientes devant l'enseigne de la boutique, sur le trottoir de la rue de l'Église" loading="lazy" width="512" height="640">
+        <img class="a" src="assets/chloe-boutique-944.jpg" alt="Chloé dans sa boutique, entre les portants, le présentoir de bijoux et la couronne de fleurs" loading="lazy" width="944" height="638">
         <img class="b" src="assets/interieur.jpg" alt="L'intérieur de la boutique : murs rayés, portants en cuivre, étagères de déco" loading="lazy" width="553" height="311">
         <svg class="stamp" viewBox="0 0 120 120" aria-hidden="true">
           <defs><path id="circ" d="M60 60m-44 0a44 44 0 1 1 88 0a44 44 0 1 1-88 0"/></defs>
@@ -484,10 +533,12 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
         </svg>
       </div>
       <div>
-        <span class="kicker rv">Son histoire</span>
-        <h2 id="h-story" class="rv d1">D'un été éphémère à une vraie boutique.</h2>
-        <p class="rv d2">Tout a commencé par une boutique éphémère, l'été 2024 à Bénodet&nbsp;: Les petits trésors de Chloé. Les clientes sont venues, puis revenues.</p>
-        <p class="rv d2">Au printemps 2026, Chloé a ouvert sa propre boutique, derrière une façade de granit de la rue de l'Église. Elle reste ouverte toute l'année, même quand les vacanciers sont partis.</p>
+        <!-- BROUILLON rédigé pour Chloé, à la première personne : à lui faire relire et corriger avant toute mise en ligne publique -->
+        <span class="kicker rv">Le mot de Chloé</span>
+        <h2 id="h-story" class="rv d1">Tout a commencé par un été.</h2>
+        <p class="rv d2">À l'été 2024, j'ai ouvert une boutique éphémère à Bénodet&nbsp;: Les petits trésors de Chloé. Vous êtes venus, puis revenus. C'est vous qui m'avez donné envie de continuer.</p>
+        <p class="rv d2">Au printemps 2026, j'ai ouvert ma propre boutique, derrière la façade de granit de la rue de l'Église. J'y choisis chaque pièce une à une, en pensant à vous, à ceux que vous aimez et à vos maisons.</p>
+        <p class="rv d2">Et je reste ouverte toute l'année, même quand les vacanciers sont partis. Poussez la porte, je serai ravie de vous accueillir.</p>
         <a class="btn light rv d3" href="#venir">Voir les horaires <svg aria-hidden="true"><use href="#arrow"/></svg></a>
       </div>
     </div>
@@ -495,33 +546,27 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
 
   <div class="waves" aria-hidden="true"><i></i><b></b></div>
 
-  <section class="sec now" id="en-ce-moment" aria-labelledby="h-now">
+  <!-- Boutique en ligne : piloté par window.CHLOE_SHOP (en haut du fichier) -->
+  <section class="sec eshop" id="e-boutique" aria-labelledby="h-eshop" data-shop-slot>
     <div class="wrap sec-head">
       <div>
-        <span class="kicker rv">En ce moment</span>
-        <h2 id="h-now" class="rv d1">Vu en boutique cette saison.</h2>
+        <span class="kicker rv"><span data-soon>Bientôt en ligne</span><span data-live>La boutique en ligne</span></span>
+        <h2 id="h-eshop" class="rv d1"><span data-soon>Vos trésors, bientôt livrés chez vous.</span><span data-live>Un trésor, à commander d'ici.</span></h2>
       </div>
-      <div class="rail-ctrl rv d2">
-        <button class="arrow" type="button" data-dir="-1" aria-label="Photos précédentes"><svg aria-hidden="true" style="transform:scaleX(-1)"><use href="#arrow"/></svg></button>
-        <button class="arrow" type="button" data-dir="1" aria-label="Photos suivantes"><svg aria-hidden="true"><use href="#arrow"/></svg></button>
-      </div>
+      <p class="rv d2"><span data-soon>Chloé prépare une sélection de pièces à commander en ligne. En attendant, tout se passe rue de l'Église.</span><span data-live>Une sélection de la boutique, à commander en quelques clics.</span></p>
     </div>
-    <div class="rail-wrap rv d2">
-      <div class="rail" tabindex="0" aria-label="Pièces vues en boutique, faire défiler horizontalement">
-        <figure class="item"><div class="ph"><img src="assets/pull-raye.jpg" alt="Pull à larges rayures chocolat et blanc sur un portant" loading="lazy"><span class="tag script" aria-hidden="true">coup de cœur</span></div><figcaption>Le pull rayé<small>Grosses rayures, maille épaisse</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/vichy.jpg" alt="Chemises en vichy rouge et blouses fleuries sur un portant" loading="lazy"></div><figcaption>Vichy et fleurs<small>Chemises et blouses</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/foulard.jpg" alt="Une cliente assise sur un muret de granit, foulard bordeaux noué autour du cou" loading="lazy"></div><figcaption>Le foulard bordeaux<small>À nouer de mille façons</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/sac.jpg" alt="Sac en cuir cognac présenté dans la vitrine" loading="lazy"></div><figcaption>Le sac cognac<small>En vitrine</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/mailles.jpg" alt="Table en bois avec des pulls pliés, un foulard et une orchidée, devant un portant" loading="lazy"><span class="tag script" aria-hidden="true">coup de cœur</span></div><figcaption>La grande table<small>Mailles pliées, foulards</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/paillettes.jpg" alt="Portant de pantalons à paillettes et de jeans" loading="lazy"></div><figcaption>Paillettes et jeans<small>Pour les soirs de fête</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/coussin.jpg" alt="Coussin à rayures vertes près de la fenêtre de la boutique" loading="lazy"></div><figcaption>Le coussin rayé<small>Côté maison</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/baskets.jpg" alt="Baskets posées sur une boîte, devant un rideau en lin" loading="lazy"></div><figcaption>Les baskets<small>Pour marcher jusqu'à la plage</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/portant.jpg" alt="Portant en cuivre chargé de vestes kaki et de chemises léopard" loading="lazy"></div><figcaption>Le portant de saison<small>Kaki, léopard, satin</small></figcaption></figure>
-        <figure class="item"><div class="ph"><img src="assets/vitrine.jpg" alt="Trois mannequins en manteaux et pulls dans la vitrine, la rue en reflet" loading="lazy"></div><figcaption>La vitrine<small>Elle change souvent</small></figcaption></figure>
+    <div class="wrap">
+      <div class="prods" data-soon aria-label="Exemples de pièces, bientôt en ligne">
+        <article class="prod rv"><div class="ph"><img src="assets/vichy.jpg" alt="Chemises en vichy rouge et blouses fleuries sur un portant" loading="lazy"><span class="tag script" aria-hidden="true">bientôt</span></div><div class="prod-row"><h3>La chemise vichy</h3></div><span class="soon-note">Bientôt en ligne</span><a class="btn ghost" role="button" aria-disabled="true" tabindex="-1">Ajouter au panier</a></article>
+        <article class="prod rv d1"><div class="ph"><img src="assets/foulard.jpg" alt="Foulard bordeaux noué autour du cou" loading="lazy"></div><div class="prod-row"><h3>Le foulard bordeaux</h3></div><span class="soon-note">Bientôt en ligne</span><a class="btn ghost" role="button" aria-disabled="true" tabindex="-1">Ajouter au panier</a></article>
+        <article class="prod rv d2"><div class="ph"><img src="assets/baskets.jpg" alt="Baskets posées sur une boîte, devant un rideau en lin" loading="lazy"></div><div class="prod-row"><h3>Les baskets</h3></div><span class="soon-note">Bientôt en ligne</span><a class="btn ghost" role="button" aria-disabled="true" tabindex="-1">Ajouter au panier</a></article>
+        <article class="prod rv d3"><div class="ph"><img src="assets/coussin.jpg" alt="Coussin à rayures vertes" loading="lazy"></div><div class="prod-row"><h3>Le coussin rayé</h3></div><span class="soon-note">Bientôt en ligne</span><a class="btn ghost" role="button" aria-disabled="true" tabindex="-1">Ajouter au panier</a></article>
       </div>
-    </div>
-    <div class="wrap rail-foot rv">
-      <a class="link" href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener">Toutes les nouveautés sur Instagram <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+      <div class="prods" data-live data-shop-grid aria-live="polite"></div>
+      <div class="eshop-foot rv">
+        <a class="link" data-soon href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener">Être prévenu de l'ouverture sur Instagram <svg aria-hidden="true"><use href="#arrow"/></svg></a>
+        <small data-live>Paiement sécurisé par Shopify.</small>
+      </div>
     </div>
   </section>
 
@@ -602,8 +647,8 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
           <a class="btn ghost" href="tel:+33645518822"><svg aria-hidden="true"><use href="#tel"/></svg> 06 45 51 88 22</a>
           <a class="btn ghost" href="https://www.instagram.com/les.tresors.de.chloe.benodet/" target="_blank" rel="noopener"><svg aria-hidden="true"><use href="#ig"/></svg> Instagram</a>
         </div>
-        <img class="door rv" src="assets/facade-porte.jpg" alt="La porte de la boutique avec l'ardoise posée devant" loading="lazy" width="554" height="311">
-        <p class="door-cap rv">La porte, et l'ardoise du jour.</p>
+        <img class="door rv" src="assets/facade-granit-hd.jpg" alt="La façade de granit de la boutique, ses deux vitrines et l'ardoise posée devant la porte" loading="lazy" width="1280" height="720">
+        <p class="door-cap rv">La façade de granit, et l'ardoise du jour devant la porte.</p>
       </div>
     </div>
   </section>
@@ -646,7 +691,7 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
       </div>
       <div>
         <h3>La boutique</h3>
-        <ul><li><a href="#boutique">Qui est Chloé</a></li><li><a href="#rayons">Les rayons</a></li><li><a href="#en-ce-moment">En ce moment</a></li></ul>
+        <ul><li><a href="#boutique">Qui est Chloé</a></li><li><a href="#rayons">Les rayons</a></li><li data-shop-slot><a href="#e-boutique">Boutique en ligne</a></li></ul>
       </div>
       <div>
         <h3>Infos</h3>
@@ -696,18 +741,6 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
   menu.addEventListener('click',function(e){ if(e.target.closest('[data-close]')||e.target.closest('a')) setMenu(false); });
   d.addEventListener('keydown',function(e){ if(e.key==='Escape'&&menu.classList.contains('open')) setMenu(false); });
 
-  /* carrousel */
-  var rail=d.querySelector('.rail'), arrows=d.querySelectorAll('.arrow');
-  function step(){ var it=rail.querySelector('.item'); return it? (it.getBoundingClientRect().width+20)*2 : 300; }
-  function upd(){
-    var max=rail.scrollWidth-rail.clientWidth-2;
-    arrows[0].disabled=rail.scrollLeft<=2; arrows[1].disabled=rail.scrollLeft>=max;
-  }
-  arrows.forEach(function(b){ b.addEventListener('click',function(){
-    rail.scrollBy({left:step()*(+b.dataset.dir),behavior:reduce.matches?'auto':'smooth'});
-  }); });
-  rail.addEventListener('scroll',function(){ window.requestAnimationFrame(upd); },{passive:true});
-  window.addEventListener('resize',upd); upd();
 
   /* ouvert ou fermé, à l'heure de Bénodet */
   var H={0:[],1:[[630,780]],2:[[630,780],[870,1140]],3:[[630,780],[870,1140]],4:[[630,780],[870,1140]],5:[[630,780],[870,1140]],6:[[630,780],[870,1140]]};
@@ -743,6 +776,36 @@ details p{padding:0 0 24px;color:var(--muted);max-width:60ch}
     });
   }
   status(); setInterval(status,60000);
+
+  /* boutique en ligne : vrais produits Shopify (mode "live") */
+  (function(){
+    var S=window.CHLOE_SHOP||{}, grid=d.querySelector('[data-shop-grid]');
+    if(root.getAttribute('data-shop')!=='live'||!grid) return;
+    function esc(v){ return String(v==null?'':v).replace(/[&<>"]/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+    var dom=String(S.storeDomain).replace(/^https?:\/\//,'').replace(/\/+$/,'');
+    var n=Math.max(1,Math.min(24,parseInt(S.count,10)||4));
+    var card='<article class="prod">'+
+      '<div class="ph"><shopify-media query="product.featuredImage" width="600" height="750"></shopify-media></div>'+
+      '<div class="prod-row"><h3><shopify-data query="product.title"></shopify-data></h3>'+
+      '<span class="price"><shopify-money query="product.selectedOrFirstAvailableVariant.price"></shopify-money></span></div>'+
+      '<button class="btn ghost" type="button" data-add>Ajouter au panier</button></article>';
+    var ghost='', i; for(i=0;i<n;i++) ghost+='<div class="prod prod-ghost" aria-hidden="true"><div class="ph"></div><div class="bar"></div></div>';
+    var list=function(q){ return '<shopify-list-context type="product" query="'+q+'" first="'+n+'"><template>'+card+'</template></shopify-list-context>'; };
+    var html='<shopify-store store-domain="https://'+esc(dom)+'" country="'+esc(S.country||'FR')+'" language="'+esc(S.language||'FR')+'"></shopify-store>';
+    html+= S.collection
+      ? '<shopify-context type="collection" handle="'+esc(S.collection)+'"><template>'+list('collection.products')+'</template><div shopify-loading-placeholder style="display:contents">'+ghost+'</div></shopify-context>'
+      : list('products');
+    grid.innerHTML=html;
+    if(!d.getElementById('cart')){ var c=d.createElement('shopify-cart'); c.id='cart'; d.body.appendChild(c); }
+    var sc=d.createElement('script'); sc.type='module'; sc.src='https://cdn.shopify.com/storefront/web-components.js'; d.head.appendChild(sc);
+    d.addEventListener('click',function(e){
+      var add=e.target.closest('[data-add]');
+      if(add){ d.getElementById('cart').addLine(e).showModal(); return; }
+      var cb=e.target.closest('[data-cart-btn]');
+      if(cb){ e.preventDefault(); d.getElementById('cart').showModal(); }
+    });
+    d.querySelectorAll('[data-cart-btn]').forEach(function(b){ b.setAttribute('aria-label','Ouvrir le panier'); });
+  })();
 
   var y=d.querySelector('[data-year]'); if(y) y.textContent=new Date().getFullYear();
 })();
